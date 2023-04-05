@@ -10,7 +10,7 @@ public class MovePMDirectories {
         public static void main(String[] args) {
 
             String sourceDirectoryPath = "C:\\test\\source";
-            String destinationDirectoryPath = "C:\\test\\destination";
+            String destinationDirectoryPath = "C:\\test\\Philip-Morris";
             File sourceDirectory = new File(sourceDirectoryPath);
             File destinationDirectory = new File(destinationDirectoryPath);
 
@@ -61,20 +61,17 @@ public class MovePMDirectories {
             directoryToMoveNames.add("F802");
             directoryToMoveNames.add("F810");
 
-
             checkIfExistDirectoryToMoveNames (destinationDirectory, directoryToMoveNames );
-
-
-
 
             for (File directory : directoriesInSourceDirectory) {
                 for (String name : directoryToMoveNames) {
                     if (directory.getName().contains(name)) {
-
-                        if (!destinationDirectory.exists()) {
-                            destinationDirectory.mkdir();
+                        String destinationSubDirectoryPath = destinationDirectoryPath + File.separator + name;
+                        File destinationSubDirectory = new File(destinationSubDirectoryPath);
+                        if (!destinationSubDirectory.exists()) {
+                            destinationSubDirectory.mkdir();
                         }
-                        File newDirectory = new File(destinationDirectory, directory.getName());
+                        File newDirectory = new File(destinationSubDirectory, directory.getName());
                         if (directory.renameTo(newDirectory)) {
                             System.out.println("Moved directory: " + directory.getAbsolutePath());
                         } else {
